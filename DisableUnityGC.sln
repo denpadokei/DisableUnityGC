@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisableUnityGC", "DisableUnityGC\DisableUnityGC.csproj", "{B49ED6B8-238F-4AF8-9937-A355B278A339}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B49ED6B8-238F-4AF8-9937-A355B278A339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B49ED6B8-238F-4AF8-9937-A355B278A339}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B49ED6B8-238F-4AF8-9937-A355B278A339}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B49ED6B8-238F-4AF8-9937-A355B278A339}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AEFB2AAB-4420-41AC-9398-DFB96A0BAA22}
+	EndGlobalSection
+EndGlobal
