@@ -1,6 +1,8 @@
-﻿using IPA;
+﻿using DisableUnityGC.Installer;
+using IPA;
 using IPA.Config;
 using IPA.Config.Stores;
+using SiraUtil.Zenject;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,24 +14,23 @@ using IPALogger = IPA.Logging.Logger;
 
 namespace DisableUnityGC
 {
-    [Plugin(RuntimeOptions.SingleStartInit)]
+    [Plugin(RuntimeOptions.DynamicInit)]
     public class Plugin
     {
         internal static Plugin Instance { get; private set; }
         internal static IPALogger Log { get; private set; }
-        internal const string HARMONY_ID = "DisableUnityGC.denpadokei.com.github";
-        private static HarmonyLib.Harmony harmony;
         [Init]
         /// <summary>
         /// Called when the plugin is first loaded by IPA (either when the game starts or when the plugin is enabled if it starts disabled).
         /// [Init] methods that use a Constructor or called before regular methods like InitWithConfig.
         /// Only use [Init] with one Constructor.
         /// </summary>
-        public void Init(IPALogger logger)
+        public void Init(IPALogger logger, Zenjector zenjector)
         {
             Instance = this;
             Log = logger;
             Log.Info("DisableUnityGC initialized.");
+            zenjector.OnApp<DisableGCAppInstaller>();
         }
 
         #region BSIPA Config
@@ -48,24 +49,12 @@ namespace DisableUnityGC
         public void OnApplicationStart()
         {
             Log.Debug("OnApplicationStart");
-            harmony = new HarmonyLib.Harmony(HARMONY_ID);
         }
 
         [OnExit]
         public void OnApplicationQuit()
         {
             Log.Debug("OnApplicationQuit");
-        }
-
-        [OnEnable]
-        public void OnEnable()
-        {
-            harmony.PatchAll(Assembly.GetExecutingAssembly());
-        }
-        [OnDisable]
-        public void OnDisable()
-        {
-            harmony.UnpatchAll(HARMONY_ID);
         }
     }
 }
