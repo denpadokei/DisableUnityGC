@@ -1,7 +1,7 @@
 # DisableUnityGC  
 GameCore中のGCをオフにします。
 ## 依存MOD  
-SiraUtil
+SiraUtil  
 BS Utils
 
 # 注意  
