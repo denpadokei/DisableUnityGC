@@ -7,6 +7,7 @@ using Zenject;
 using SiraUtil;
 using UnityEngine.Scripting;
 using UnityEngine.SceneManagement;
+using DisableUnityGC.Models;
 
 namespace DisableUnityGC.Installer
 {
@@ -17,7 +18,9 @@ namespace DisableUnityGC.Installer
 
         public override void InstallBindings()
         {
-            
+#if DEBUG
+            this.Container.BindInterfacesAndSelfTo<NotifyMemorySize>().FromNewComponentOnNewGameObject(nameof(NotifyMemorySize)).AsSingle().NonLazy();
+#endif
         }
 
         public override void Start()
