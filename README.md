@@ -2,7 +2,8 @@
 GameCore中のGCをオフにします。
 ## 依存MOD  
 SiraUtil  
-BS Utils
+BS Utils  
+BeatSaberMarkupLanguage  
 
 # 注意  
 LagKillerが入っている場合はLagKillerが優先されGCは常にONになります。  
