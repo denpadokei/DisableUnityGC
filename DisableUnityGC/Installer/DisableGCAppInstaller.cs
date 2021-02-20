@@ -8,6 +8,7 @@ using SiraUtil;
 using UnityEngine.Scripting;
 using UnityEngine.SceneManagement;
 using DisableUnityGC.Models;
+using DisableUnityGC.Configuration;
 
 namespace DisableUnityGC.Installer
 {
@@ -18,26 +19,27 @@ namespace DisableUnityGC.Installer
 
         public override void InstallBindings()
         {
-#if DEBUG
             this.Container.BindInterfacesAndSelfTo<NotifyMemorySize>().FromNewComponentOnNewGameObject(nameof(NotifyMemorySize)).AsSingle().NonLazy();
-#endif
         }
 
         public override void Start()
         {
             base.Start();
-            this._gameScenesManager.transitionDidFinishEvent += this._gameScenesManager_transitionDidFinishEvent;
+            this._gameScenesManager.transitionDidFinishEvent += this.GameScenesManager_transitionDidFinishEvent;
             GarbageCollector.GCModeChanged += this.GarbageCollector_GCModeChanged;
         }
 
         private void OnDestroy()
         {
-            this._gameScenesManager.transitionDidFinishEvent -= this._gameScenesManager_transitionDidFinishEvent;
+            this._gameScenesManager.transitionDidFinishEvent -= this.GameScenesManager_transitionDidFinishEvent;
             GarbageCollector.GCModeChanged -= this.GarbageCollector_GCModeChanged;
         }
 
-        private void _gameScenesManager_transitionDidFinishEvent(ScenesTransitionSetupDataSO arg1, DiContainer arg2)
+        private void GameScenesManager_transitionDidFinishEvent(ScenesTransitionSetupDataSO arg1, DiContainer arg2)
         {
+            if (PluginConfig.Instance?.Enable != true) {
+                return;
+            }
             if (SceneManager.GetActiveScene().name != "GameCore") {
                 GarbageCollector.GCMode = GarbageCollector.Mode.Enabled;
             }

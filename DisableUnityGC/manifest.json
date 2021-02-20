@@ -11,5 +11,8 @@
     "SiraUtil": "^2.5.1",
     "BS Utils": "^1.7.0"
   },
+  "files": [
+    "Libs\\MemoryViewer.dll"
+  ],
   "features": []
 }

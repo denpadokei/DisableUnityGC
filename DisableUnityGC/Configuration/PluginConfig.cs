@@ -1,4 +1,4 @@
-﻿/*
+﻿using System;
 using System.Runtime.CompilerServices;
 using IPA.Config.Stores;
 
@@ -8,8 +8,9 @@ namespace DisableUnityGC.Configuration
     internal class PluginConfig
     {
         public static PluginConfig Instance { get; set; }
-        public virtual int IntValue { get; set; } = 42; // Must be 'virtual' if you want BSIPA to detect a value change and save the config automatically.
-
+        public virtual bool Enable { get; set; } = true;
+        public virtual bool MemorySize { get; set; } = false;
+        public event Action<PluginConfig> OnConfigChanged;
         /// <summary>
         /// This is called whenever BSIPA reads the config from disk (including when file changes are detected).
         /// </summary>
@@ -24,6 +25,7 @@ namespace DisableUnityGC.Configuration
         public virtual void Changed()
         {
             // Do stuff when the config is changed.
+            this.OnConfigChanged?.Invoke(this);
         }
 
         /// <summary>
@@ -32,7 +34,8 @@ namespace DisableUnityGC.Configuration
         public virtual void CopyFrom(PluginConfig other)
         {
             // This instance's members populated from other
+            this.Enable = other.Enable;
+            this.MemorySize = other.MemorySize;
         }
     }
 }
-*/
