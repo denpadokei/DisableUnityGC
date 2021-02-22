@@ -25,10 +25,23 @@ namespace DisableUnityGC.Models
             this.memorySizeCanvas = this.gameObject.AddComponent<Canvas>();
             this.memorySizeCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
             this.memorySizeText = this.memorySizeCanvas.gameObject.AddComponent<TextMeshProUGUI>();
+            this._memoryCheckTimer = new Timer(1000);
+            this._memoryCheckTimer.Enabled = PluginConfig.Instance.MemorySize;
             PluginConfig.Instance.OnConfigChanged += this.Instance_OnConfigChanged;
+            this._memoryCheckTimer.Elapsed += this.OnMemoryCheckTimer_Elapsed;
         }
 
-        
+        private void OnEnable()
+        {
+            if (this._memoryCheckTimer?.Enabled != true) {
+                this._memoryCheckTimer.Enabled = true;
+            }
+        }
+
+        private void OnDisable()
+        {
+            this._memoryCheckTimer.Enabled = false;
+        }
 
         private IEnumerator Start()
         {
@@ -43,9 +56,6 @@ namespace DisableUnityGC.Models
             this.memorySizeText.fontSize = 40;
             this.memorySizeText.ForceMeshUpdate();
             this.memorySizeCanvas.enabled = PluginConfig.Instance.MemorySize;
-            this._memoryCheckTimer = new Timer(1000);
-            this._memoryCheckTimer.Enabled = PluginConfig.Instance.MemorySize;
-            this._memoryCheckTimer.Elapsed += this.OnMemoryCheckTimer_Elapsed;
             this._memoryCheckTimer.Start();
         }
 
