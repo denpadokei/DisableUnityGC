@@ -29,9 +29,6 @@ namespace DisableUnityGC.Models
             {
                 while (true) {
                     try {
-                        if (PluginConfig.Instance.MemorySize != true) {
-                            continue;
-                        }
                         this.UpdateMemorySizeText();
                     }
                     catch { }
