@@ -16,7 +16,7 @@ namespace DisableUnityGC.Models
     public class NotifyMemorySize : MonoBehaviour
     {
         private Timer _memoryCheckTimer;
-        private long _memorySize;
+        private ulong _memorySize;
         private TextMeshProUGUI memorySizeText;
         private Canvas memorySizeCanvas;
         #region Unity message
@@ -63,7 +63,7 @@ namespace DisableUnityGC.Models
                 return;
             }
             this._memorySize = NativeMethods.GetWorkingSet();
-            this.memorySizeText.text = $"WorkingSet : {this._memorySize} byte ({this._memorySize / 1024 / 1024} MB)";
+            this.memorySizeText.text = $"WorkingSet : {this._memorySize} byte ({this._memorySize / 1024ul / 1024ul} MB)";
         }
         private void Instance_OnConfigChanged(PluginConfig obj)
         {

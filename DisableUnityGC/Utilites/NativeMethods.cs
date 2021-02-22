@@ -10,9 +10,9 @@ namespace DisableUnityGC.Utilites
     public class NativeMethods
     {
         [DllImport("Libs/MemoryViewer.dll")]
-        public extern static long GetWorkingSet();
+        public extern static ulong GetWorkingSet();
 
         [DllImport("Libs/MemoryViewer.dll")]
-        public extern static long GetCommitSize();
+        public extern static ulong GetCommitSize();
     }
 }
