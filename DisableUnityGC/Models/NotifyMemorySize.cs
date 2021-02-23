@@ -31,7 +31,10 @@ namespace DisableUnityGC.Models
                     try {
                         this.UpdateMemorySizeText();
                     }
-                    catch { }
+                    catch (Exception e)
+                    {
+                        Plugin.Log.Error(e);
+                    }
                     finally {
                         Thread.Sleep(1000);
                     }
@@ -70,7 +73,10 @@ namespace DisableUnityGC.Models
                 return;
             }
             this._memorySize = NativeMethods.GetWorkingSet();
-            this.memorySizeText.text = $"WorkingSet : {this._memorySize} byte ({this._memorySize / 1024ul / 1024ul} MB)";
+            HMMainThreadDispatcher.instance?.Enqueue(() => 
+            {
+                this.memorySizeText.text = $"WorkingSet : {this._memorySize} byte ({this._memorySize / 1024ul / 1024ul} MB)";
+            });
         }
         private void Instance_OnConfigChanged(PluginConfig obj)
         {

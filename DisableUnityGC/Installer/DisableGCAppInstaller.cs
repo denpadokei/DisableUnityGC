@@ -19,7 +19,7 @@ namespace DisableUnityGC.Installer
 
         public override void InstallBindings()
         {
-            this.Container.BindInterfacesAndSelfTo<NotifyMemorySize>().FromNewComponentOnNewGameObject(nameof(NotifyMemorySize)).AsSingle().NonLazy();
+            this.Container.BindInterfacesAndSelfTo<NotifyMemorySize>().FromNewComponentOnNewGameObject(nameof(NotifyMemorySize)).AsCached().NonLazy();
         }
 
         public override void Start()
