@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Zenject;
-using SiraUtil;
-using UnityEngine.Scripting;
-using UnityEngine.SceneManagement;
+﻿using DisableUnityGC.Configuration;
 using DisableUnityGC.Models;
-using DisableUnityGC.Configuration;
+using SiraUtil;
+using UnityEngine.SceneManagement;
+using UnityEngine.Scripting;
+using Zenject;
 
 namespace DisableUnityGC.Installer
 {
     public class DisableGCAppInstaller : MonoInstaller
     {
         [Inject]
-        GameScenesManager _gameScenesManager;
+        private readonly GameScenesManager _gameScenesManager;
 
         public override void InstallBindings()
         {

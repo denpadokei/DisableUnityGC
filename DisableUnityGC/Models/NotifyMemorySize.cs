@@ -3,11 +3,7 @@ using DisableUnityGC.Configuration;
 using DisableUnityGC.Utilites;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -31,8 +27,7 @@ namespace DisableUnityGC.Models
                     try {
                         this.UpdateMemorySizeText();
                     }
-                    catch (Exception e)
-                    {
+                    catch (Exception e) {
                         Plugin.Log.Error(e);
                     }
                     finally {
@@ -45,7 +40,7 @@ namespace DisableUnityGC.Models
         private IEnumerator Start()
         {
             yield return new WaitWhile(() => !FontManager.IsInitialized);
-            if (FontManager.TryGetTMPFontByFamily("Segoe UI", out var font)) {
+            if (FontManager.TryGetTMPFontByFamily("Teko-Medium SDF", out var font)) {
                 this.memorySizeText.font = font;
             }
             this.memorySizeText.alignment = TextAlignmentOptions.BottomRight;
@@ -73,7 +68,7 @@ namespace DisableUnityGC.Models
                 return;
             }
             this._memorySize = NativeMethods.GetWorkingSet();
-            HMMainThreadDispatcher.instance?.Enqueue(() => 
+            HMMainThreadDispatcher.instance?.Enqueue(() =>
             {
                 this.memorySizeText.text = $"WorkingSet : {this._memorySize} byte ({this._memorySize / 1024ul / 1024ul} MB)";
             });
